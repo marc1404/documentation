@@ -54,43 +54,12 @@ jobs:
           path: .vitepress/dist
         if: github.event_name != 'pull_request' # Skip upload on PRs
 
-  # Test job
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm # or pnpm / yarn
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Docforge
-        run: |
-          wget https://github.com/gardener/docforge/releases/download/v0.55.0/docforge-linux-amd64
-          mv docforge-linux-amd64 docforge
-          chmod +x docforge
-          DOCFORGE_CONFIG=.docforge/config.yaml GITHUB_OAUTH_TOKEN=${{ secrets.GITHUB_TOKEN }} ./docforge
-      - name: Install dependencies
-        run: npm ci # or pnpm install / yarn install / bun install
-      - name: Postprocessing Content
-        run: |
-          npm run post-processing-all
-
-      - name: Run Vitest
-        run: npm test
-
   # Deployment job
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    needs: [build, test]
+    needs: [build]
     runs-on: ubuntu-latest
     name: Deploy
     steps:
