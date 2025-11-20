@@ -57,13 +57,8 @@ export default defineConfig({
 function getNavConfig () {
   return [
     {
-      text: 'Demo',
-      link: 'https://demo.gardener.cloud/',
-    },
-    {
-      text: 'Adopters',
-      link: '/adopter',
-      activeMatch: 'adopter',
+      text: 'Getting Started',
+      link: '/getting-started',
     },
     {
       component: 'VPNavbarMenuGroupWrapper',
@@ -80,14 +75,31 @@ function getNavConfig () {
       },
     },
     {
-      text: 'Blogs',
-      link: '/blog',
-      activeMatch: 'blog',
+      text: 'What\'s New',
+      link: '/whats-new',
+      activeMatch: 'whats-new',
     },
     {
-      text: 'Community',
-      link: '/community',
-      activeMatch: 'community',
+      text: 'Bio',
+      items: [
+        {text: 'Adopters', link: '/adopter'},
+        {text: 'Case Studies', link: '/case-studies'},
+        {text: 'Steering', link: '/steering'},
+        {text: 'NeoNephos', link: '/neo-nephos'},
+        {text: 'Comparison', link: '/comparison'},
+      ]
+    },
+    {
+      text: 'Contribute',
+      link: '/contribute',
+      activeMatch: 'contribute',
+    },
+    {
+      text: 'Reference',
+      items: [
+        {text: 'API Reference', link: '/api-reference'},
+        {text: 'Examples', link: '/examples'},
+      ]
     },
   ]
 }
